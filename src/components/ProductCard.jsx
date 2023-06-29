@@ -17,6 +17,7 @@ import Box from "@mui/material/Box";
 import Comment from "@mui/icons-material/Comment";
 import MenuBtn from "./MenuBtn";
 import Rating from "@mui/material/Rating";
+import StarIcon from "@mui/icons-material/Star";
 
 function ProductCard({ product }) {
   const { title, price, category, description, image, rating } = product;
@@ -36,11 +37,22 @@ function ProductCard({ product }) {
   return (
     <Card
       sx={{
-        width: { el: 200, lg: 200, md: 400 },
+        width: { el: 200, lg: 250, md: 400 },
+        padding: 2,
+        bgcolor: "rgba(0, 0, 0, 0.758)",
+        color: "white",
+        borderRadius: 3,
+        boxShadow:"0px 0px 2px white"
       }}
     >
       <CardHeader
-        sx={{ height: 15, display: "flex", alignItems: "center" }}
+        sx={{
+          height: 35,
+          display: "flex",
+          alignItems: "center",
+          width: "100%",
+          textAlign: "justify",
+        }}
         avatar={
           <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
             R
@@ -78,14 +90,22 @@ function ProductCard({ product }) {
       )}
 
       <Box
-        sx={{ display: "flex", alignItems: "center", justifyContent: "center" }}
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          height: "150px",
+          width:"100%",
+          bgcolor: "white",
+          borderRadius: "10px",
+        }}
       >
         <img
           src={image}
           alt={title}
           style={{
-            height: "300px",
-            width: "300px",
+            height: "95%",
+            width: "98%",
           }}
         />
       </Box>
@@ -97,12 +117,13 @@ function ProductCard({ product }) {
           flexDirection: "row",
 
           height: 3,
+          color: "white",
         }}
       >
-        <Typography fontSize="9px" variant="body2" color="text.secondary">
+        <Typography fontSize="9px" variant="body2" textTransform="uppercase">
           {category}
         </Typography>
-        <Typography fontSize="9px" variant="body2" color="text.secondary">
+        <Typography fontSize="9px" variant="body2">
           ₹{price}
         </Typography>
       </CardContent>
@@ -111,9 +132,26 @@ function ProductCard({ product }) {
         defaultValue={rate}
         precision={0.5}
         readOnly
+        emptyIcon={
+          <StarIcon
+            style={{ opacity: 0.25, color: "white" }}
+            fontSize="inherit"
+          />
+        }
+        sx={{
+          "& .MuiRating-iconFilled": {
+            color: "red",
+          },
+          "& .MuiRating-iconFocus": {
+            color: "orange",
+          },
+          "& .MuiRating-iconHover": {
+            color: "green",
+          },
+        }}
       />
       <Typography fontSize="7px" paragraph>
-        ( {count} )
+        {count}
       </Typography>
       <CardActions
         disableSpacing
@@ -121,16 +159,18 @@ function ProductCard({ product }) {
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
+
+          height: 10,
         }}
       >
         <IconButton aria-label="add to favorites">
-          <Favorite />
+          <Favorite sx={{ color: "gray" }} />
         </IconButton>
         <IconButton aria-label="comment">
-          <Comment />
+          <Comment sx={{ color: "gray" }} />
         </IconButton>
         <IconButton aria-label="share">
-          <Share />
+          <Share sx={{ color: "gray" }} />
         </IconButton>
         <ExpandMore
           expand={expanded}
